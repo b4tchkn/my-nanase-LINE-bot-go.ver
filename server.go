@@ -4,6 +4,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"fmt"
 
 	"github.com/line/line-bot-sdk-go/linebot"
 )
@@ -33,11 +34,17 @@ func main() {
 			}
 			return
 		}
+
 		for _, event := range events {
 			if event.Type == linebot.EventTypeMessage {
 				switch message := event.Message.(type) {
 				case *linebot.TextMessage:
-					if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(message.Text)).Do(); err != nil {
+					repmes, err := a3rt(message.Text)
+					if err != nil {
+						log.Print(err)
+					}
+					fmt.Print("Reply", repmes.Results[0].Reply)
+					if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(repmes.Results[0].Reply)).Do(); err != nil {
 						log.Print(err)
 					}
 				}
