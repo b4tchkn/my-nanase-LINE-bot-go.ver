@@ -39,12 +39,11 @@ func main() {
 			if event.Type == linebot.EventTypeMessage {
 				switch message := event.Message.(type) {
 				case *linebot.TextMessage:
-					fmt.Println("Send", message.Text)
 					repmes, err := a3rt(message.Text)
 					if err != nil {
 						log.Print(err)
 					}
-					fmt.Println("Reply", repmes.Results[0].Reply)
+					fmt.Prinln("Reply", repmes.Results[0].Reply)
 					if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(repmes.Results[0].Reply)).Do(); err != nil {
 						log.Print(err)
 					}

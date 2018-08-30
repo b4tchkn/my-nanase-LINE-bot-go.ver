@@ -39,7 +39,6 @@ func main() {
 			if event.Type == linebot.EventTypeMessage {
 				switch message := event.Message.(type) {
 				case *linebot.TextMessage:
-					fmt.Println("Send", message.Text)
 					repmes, err := a3rt(message.Text)
 					if err != nil {
 						log.Print(err)
