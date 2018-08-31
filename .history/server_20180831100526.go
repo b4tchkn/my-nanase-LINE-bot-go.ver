@@ -50,8 +50,6 @@ func main() {
 				switch message := event.Message.(type) {
 				case *linebot.TextMessage:
 					fmt.Println("Send", message.Text)
-					// なあちゃんと言われた時はなあに？と返して
-					// それ以外はAPIによる返事を返す
 					if message.Text == "なあちゃん" {
 						repmes := "なあに？"
 						fmt.Println("Reply", repmes)

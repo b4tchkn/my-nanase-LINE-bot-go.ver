@@ -8,16 +8,16 @@ import (
 
 	"github.com/line/line-bot-sdk-go/linebot"
 )
-/*
+
 func pushMessage(bot Client, userID string) {
 		if _, err := bot.PushMessage(userID, linebot.NewTextMessage("やっほ")).Do(); err != nil {
 		log.Fatal(err)
 	}
 }
-*/
+
 func main() {
 	port := os.Getenv("PORT")
-	//userID := "Ubc0a1608b57a68e8fd8ec1c87fdc7697"
+	userID := "Ubc0a1608b57a68e8fd8ec1c87fdc7697"
 	if port == "" {
 		port = "8080"
 	}
@@ -31,7 +31,7 @@ func main() {
 	}
 
 	// Push Message
-	//pushMessage(bot, userID)
+	pushMessage(bot, userID)
 	// Setup HTTP Server for receiving requests from LINE platform
 	http.HandleFunc("/callback", func(w http.ResponseWriter, req *http.Request) {
 		events, err := bot.ParseRequest(req)
@@ -50,8 +50,6 @@ func main() {
 				switch message := event.Message.(type) {
 				case *linebot.TextMessage:
 					fmt.Println("Send", message.Text)
-					// なあちゃんと言われた時はなあに？と返して
-					// それ以外はAPIによる返事を返す
 					if message.Text == "なあちゃん" {
 						repmes := "なあに？"
 						fmt.Println("Reply", repmes)
@@ -68,10 +66,10 @@ func main() {
 						log.Print(err)
 					}
 				}
+				}
 			}
 		}
-	}
-})
+	})
 
 	// This is just sample code.
 	// For actual use, you must support HTTPS by using `ListenAndServeTLS`, a reverse proxy or something else.

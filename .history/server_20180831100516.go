@@ -17,7 +17,7 @@ func pushMessage(bot Client, userID string) {
 */
 func main() {
 	port := os.Getenv("PORT")
-	//userID := "Ubc0a1608b57a68e8fd8ec1c87fdc7697"
+	userID := "Ubc0a1608b57a68e8fd8ec1c87fdc7697"
 	if port == "" {
 		port = "8080"
 	}
@@ -50,8 +50,6 @@ func main() {
 				switch message := event.Message.(type) {
 				case *linebot.TextMessage:
 					fmt.Println("Send", message.Text)
-					// なあちゃんと言われた時はなあに？と返して
-					// それ以外はAPIによる返事を返す
 					if message.Text == "なあちゃん" {
 						repmes := "なあに？"
 						fmt.Println("Reply", repmes)
